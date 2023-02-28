@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>Chat</title>
+</head>
+<body>
+    <section style="background-color: #eee;">
+        <div class="container py-5">
+      
+          <div class="row d-flex justify-content-center">
+                <div class="col-md-12 col-lg-6 col-xl-4">
+        
+                    <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center p-3"
+                            style="border-top: 4px solid #ffa900;">
+                            <h5 class="mb-0">Chat messages:</h5>
+                                <div class="d-flex flex-row align-items-center">
+                                    
+                                    <i class="fas fa-minus me-3 text-muted fa-xs"></i>
+                                    <i class="fas fa-comments me-3 text-muted fa-xs"></i>
+                                    <i class="fas fa-times text-muted fa-xs"></i>
+                                    
+                                </div>
+                            </div>
+                            
+                    </div>
+                    <div class="card-body" data-mdb-perfect-scrollbar="true" style="position: relative; height: 400px">
+                        <ul>
+                        {% for message in messages %}
+                            <li>{{ message.sender }}: {{ message.content }}</li>
+                        {% endfor %}
+                        </ul>  
+                        <div class="card-footer text-muted d-flex justify-content-start align-items-center p-3">
+                            <div class="input-group mb-0">
+                              <form method="post" action="{% url 'post_message' %}">
+                                  {% csrf_token %}
+                                  <label for="sender">Sender:</label>
+                              <input type="text" class="form-control" placeholder="Type message"
+                                aria-label="Recipient's username" aria-describedby="button-addon2"  name="sender" id="sender"/>
+                                <hr>
+                                <label for="content">Message:</label>
+                               
+                                <textarea class="form-control" name="content" id="content"></textarea> 
+        
+                                <input class="form-control btn-danger pt-3" type="submit" value="Send">
+                              </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+          </div>
+      
+        </div>
+      </section>
+</body>
+</html>
